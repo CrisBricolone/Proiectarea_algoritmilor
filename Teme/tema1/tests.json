@@ -1,0 +1,206 @@
+// EXAMPLE MODULE CONFIG --- CHANGE LATER
+{
+    "temp_path": "./.checker_temp",
+    // Please avoid cyclic macros
+    "macros": {},
+    "tests": [
+        {
+            "displayName": "data1",
+            "file": "data1",
+            "args": [
+                "$IN_DIR/t1/c.in",
+                "$IN_DIR/t1/d.in",
+                "$OUT"
+            ],
+            "score": 6
+        },
+        {
+            "displayName": "data2",
+            "file": "data2",
+            "args": [
+                "$IN_DIR/t2/c.in",
+                "$IN_DIR/t2/d.in",
+                "$OUT"
+            ],
+            "score": 6
+        },
+        {
+            "displayName": "data3",
+            "file": "data3",
+            "args": [
+                "$IN_DIR/t3/c.in",
+                "$IN_DIR/t3/d.in",
+                "$OUT"
+            ],
+            "score": 6
+        },
+        {
+            "displayName": "data4",
+            "file": "data4",
+            "args": [
+                "$IN_DIR/t4/c.in",
+                "$IN_DIR/t4/d.in",
+                "$OUT"
+            ],
+            "score": 6
+        },
+        {
+            "displayName": "data5",
+            "file": "data5",
+            "args": [
+                "$IN_DIR/t5/c.in",
+                "$IN_DIR/t5/d.in",
+                "$OUT"
+            ],
+            "score": 6
+        },
+        {
+            "displayName": "data6",
+            "file": "data6",
+            "args": [
+                "$IN_DIR/t6/c.in",
+                "$IN_DIR/t6/d.in",
+                "$OUT"
+            ],
+            "score": 6
+        },
+        {
+            "displayName": "data7",
+            "file": "data7",
+            "args": [
+                "$IN_DIR/t7/c.in",
+                "$IN_DIR/t7/d.in",
+                "$OUT"
+            ],
+            "score": 6
+        },
+        {
+            "displayName": "data8",
+            "file": "data8",
+            "args": [
+                "$IN_DIR/t8/c.in",
+                "$IN_DIR/t8/d.in",
+                "$OUT"
+            ],
+            "score": 6
+        },
+        {
+            "displayName": "data9",
+            "file": "data9",
+            "args": [
+                "$IN_DIR/t9/c.in",
+                "$IN_DIR/t9/d.in",
+                "$OUT"
+            ],
+            "score": 6
+        },
+        {
+            "displayName": "data10",
+            "file": "data10",
+            "args": [
+                "$IN_DIR/t10/c.in",
+                "$IN_DIR/t10/d.in",
+                "$OUT"
+            ],
+            "score": 6
+        },
+        {
+            "displayName": "data11",
+            "file": "data11",
+            "args": [
+                "$IN_DIR/t11/c.in",
+                "$IN_DIR/t11/d.in",
+                "$OUT"
+            ],
+            "score": 8
+        },
+        {
+            "displayName": "data12",
+            "file": "data12",
+            "args": [
+                "$IN_DIR/t12/c.in",
+                "$IN_DIR/t12/d.in",
+                "$OUT"
+            ],
+            "score": 8
+        },
+        {
+            "displayName": "data13",
+            "file": "data13",
+            "args": [
+                "$IN_DIR/t13/c.in",
+                "$IN_DIR/t13/d.in",
+                "$OUT"
+            ],
+            "score": 8
+        },
+        {
+            "displayName": "data14",
+            "file": "data14",
+            "args": [
+                "$IN_DIR/t14/c.in",
+                "$IN_DIR/t14/d.in",
+                "$OUT"
+            ],
+            "score": 8
+        },
+        {
+            "displayName": "data15",
+            "file": "data15",
+            "args": [
+                "$IN_DIR/t15/c.in",
+                "$IN_DIR/t15/d.in",
+                "$OUT"
+            ],
+            "score": 8
+        }
+    ],
+    "ref_checker": {
+        "output_dependent": true,
+        "grade": 0.5
+    },
+    "commit_checker": {
+        "dependencies": [
+            "git"
+        ],
+        "output_dependent": false,
+        "minCommits": 3,
+        "useFormat": true,
+        "grade": 0.1
+    },
+    "memory_checker": {
+        "dependencies": [
+            "valgrind"
+        ],
+        "output_dependent": true,
+        "maxWarnings": 20,
+        "maxLeak": 100, // MB
+        "grade": 0.2
+    },
+    "style_checker": {
+        "dependencies": [
+            "cppcheck"
+        ],
+        "output_dependent": false,
+        "score_threshold": 60,
+        "grade": 0.2,
+        "thresholds": [
+            {
+                "under": 5,
+                "score": 100
+            },
+            {
+                "under": 15,
+                "score": 80
+            },
+            {
+                "under": 45,
+                "score": 40
+            },
+            {
+                "under": 70,
+                "score": 20
+            }
+        ]
+    }
+}

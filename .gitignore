@@ -1,0 +1,15 @@
+#ignoram checker
+checker
+
+#ignoram executabile si fisiere obiect
+*.o
+*.out
+*.exe
+
+#ignoram arhive zip generate eventual pentru tema
+*.zip
+*.rar
+
+#ignoram tampenii scrise de vs code
+.vscode/
+

@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+
+<valgrindoutput>
+
+<protocolversion>6</protocolversion>
+<protocoltool>memcheck</protocoltool>
+
+<preamble>
+  <line>Memcheck, a memory error detector</line>
+  <line>Copyright (C) 2002-2024, and GNU GPL'd, by Julian Seward et al.</line>
+  <line>Using Valgrind-3.26.0 and LibVEX; rerun with -h for copyright info</line>
+  <line>Command: /home/bricolone1/Github/anul1_sem2/Proiectarea_algoritmilor/Teme/tema1/src/main /home/bricolone1/Github/anul1_sem2/Proiectarea_algoritmilor/Teme/tema1/in/t8/c.in /home/bricolone1/Github/anul1_sem2/Proiectarea_algoritmilor/Teme/tema1/in/t8/d.in /home/bricolone1/Github/anul1_sem2/Proiectarea_algoritmilor/Teme/tema1/out/data8.out</line>
+</preamble>
+
+<pid>28076</pid>
+<ppid>27453</ppid>
+<tool>memcheck</tool>
+
+<args>
+  <vargv>
+    <exe>/usr/bin/valgrind</exe>
+    <arg>--leak-check=yes</arg>
+    <arg>--xml=yes</arg>
+    <arg>--xml-file=/home/bricolone1/Github/anul1_sem2/Proiectarea_algoritmilor/Teme/tema1/.checker_temp/data8.xml</arg>
+  </vargv>
+  <argv>
+    <exe>/home/bricolone1/Github/anul1_sem2/Proiectarea_algoritmilor/Teme/tema1/src/main</exe>
+    <arg>/home/bricolone1/Github/anul1_sem2/Proiectarea_algoritmilor/Teme/tema1/in/t8/c.in</arg>
+    <arg>/home/bricolone1/Github/anul1_sem2/Proiectarea_algoritmilor/Teme/tema1/in/t8/d.in</arg>
+    <arg>/home/bricolone1/Github/anul1_sem2/Proiectarea_algoritmilor/Teme/tema1/out/data8.out</arg>
+  </argv>
+</args>
+
+<status>
+  <state>RUNNING</state>
+  <time>00:00:00:00.174 </time>
+</status>
+
+<status>
+  <state>FINISHED</state>
+  <time>00:00:00:03.009 </time>
+</status>
+
+<heap_summary>
+  <memory_in_use_at_exit>
+    <bytes>0</bytes>
+    <blocks>0</blocks>
+  </memory_in_use_at_exit>
+  <total_heap_usage>
+    <allocs>1</allocs>
+    <frees>1</frees>
+    <bytes_allocated>4,096</bytes_allocated>
+  </total_heap_usage>
+</heap_summary>
+
+<all_heap_blocks_freed>true</all_heap_blocks_freed>
+
+<errorcounts>
+</errorcounts>
+
+<suppcounts>
+</suppcounts>
+
+<error_summary>
+  <errors>0</errors>
+  <error_contexts>0</error_contexts>
+  <suppressed>0</suppressed>
+  <suppressed_contexts>0</suppressed_contexts>
+</error_summary>
+
+</valgrindoutput>

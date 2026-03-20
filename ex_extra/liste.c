@@ -52,15 +52,60 @@ void disp_list(Node *head){
         printf("valoare: %d\nadresa curenta: %p\nadresa urmatoare: %p\n\n", head->info, head, head->next);
         head = head->next;
     }
+    printf("-------------------------------------------------------------------------\n");
+
     return;
 }
 
+Node* task1_interclass(Node *head_1, Node *head_2) {
+    Node *interclas = NULL;
+    Node *tail = NULL;
+    int cnt = 0;
+
+    while(head_1 && head_2) {
+        Node *new_node = (Node*)malloc(sizeof(Node));
+
+        if(cnt % 2){
+            new_node = head_2;
+            head_2 = head_2->next;
+        }
+        else {
+            new_node = head_1;
+            head_1 = head_1->next;
+        }
+        
+        if(!interclas){
+            interclas = new_node;
+            tail = new_node;
+        }
+        else {
+            tail->next = new_node;
+            tail = tail->next;
+        }
+        
+        cnt++;
+    }
+
+    if(head_1)
+        tail->next = head_1;
+
+    if(head_2)
+        tail->next = head_2;
+
+    return interclas;
+}
+
 int main(int argc, char **argv) {
-    Node *head_1 = NULL, *head_2 = NULL;
+    Node *head_1 = NULL, *head_2 = NULL, *head_interclas = NULL;
     int n, m;
 
     list_create(&n, &head_1);
-    disp_list(head_1);
+    list_create(&n, &head_2);
+    head_interclas = task1_interclass(head_1, head_2);
+
+    //disp_list(head_1);
+    //aceasta variantra strica listele initiale. daca vrem sa nu le stricam trb sa cream noduri noi pentru head_interclas si sa copeim valorile din noduri
+    disp_list(head_interclas);
 
     return 0;
 }

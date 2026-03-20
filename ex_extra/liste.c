@@ -11,6 +11,8 @@ void list_create(int *list_s, Node **head); //creating list with a given number 
 void verify_alloc(const void *p); //checks dynamic mem allocation
 void disp_list(Node *head); //displays the elements of the list
 Node* task1_interclass(Node *head_1, Node *head_2); //interclasare pe liste 
+void task3_remove_k_elem(Node **head_1); // sterge elementul al k-lea de la dreapta spre stanga
+Node* task2_interclass_no_cpy(Node *head_1, Node *head_2); //interclasare care realizeaza intersectia celor doua multimi
 
 void verify_alloc(const void *p) {
     if(!p) 
@@ -136,7 +138,34 @@ Node* task2_interclass_no_cpy(Node *head_1, Node *head_2) {
         tail->next = head_2;
 
     return new_head;
+} 
+
+void task3_remove_k_elem(Node **head_1) {
+    int k;
+    printf("Care este pozitia elementului pe care vrei sa-l stergi(de la stanga la dreapta): ");
+    scanf("%d", &k);
+
+    int nr_elem = 0;
+    Node* head_cpy = *head_1;
+    for(;head_cpy; nr_elem++, head_cpy = head_cpy->next);
+
+    int actual_poz = nr_elem - k;
+
+    if(!actual_poz) {
+        *head_1 = (*head_1)->next;
+        return;
+    }
+
+    head_cpy = *head_1;
+    for(;actual_poz > 1 && head_cpy; actual_poz--, head_cpy = head_cpy->next);
+
+    Node *deleted = head_cpy->next;
+    head_cpy->next = head_cpy->next->next;
+    free(deleted);
+
+    return;
 }
+
 
 int main(int argc, char **argv) {
     Node *head_1 = NULL, *head_2 = NULL, *head_interclas = NULL, *head_interclas_no_cpy;
@@ -148,9 +177,14 @@ int main(int argc, char **argv) {
     disp_list(head_1);
     disp_list(head_2);
 
-    head_interclas_no_cpy = task2_interclass_no_cpy(head_1, head_2);
-    disp_list(head_interclas_no_cpy);
+    task3_remove_k_elem(&head_1);
+    disp_list(head_1);
+
+    //head_interclas_no_cpy = task2_interclass_no_cpy(head_1, head_2);
+    //disp_list(head_interclas_no_cpy);
+
     //aceasta variantra strica listele initiale. daca vrem sa nu le stricam trb sa cream noduri noi pentru head_interclas si sa copeim valorile din noduri
+    //head_interclas = task1_interclass(head_1, head_2);
     //disp_list(head_interclas);
 
     return 0;

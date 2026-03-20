@@ -7,6 +7,12 @@ typedef struct linked_list{
     struct linked_list *next;
 } Node;
 
+typedef struct double_linked{
+    int info;
+    struct double_linked *next;
+    struct double_linked *prev;
+} nod;
+
 void list_create(int *list_s, Node **head); //creating list with a given number of elements
 void verify_alloc(const void *p); //checks dynamic mem allocation
 void disp_list(Node *head); //displays the elements of the list
@@ -166,9 +172,48 @@ void task3_remove_k_elem(Node **head_1) {
     return;
 }
 
+void task4_dl_list_santinela(nod **head_dl) {
+    int n;
+    printf("Cate elemente are lista dublu inlantuita cu santinela? ");
+    scanf("%d", &n);
+
+    printf("Introduceti valorile pentru noduri:\n");
+    for(int i = 0; i < n; i++) {
+        nod *new_nod = (nod*)malloc(sizeof(nod));
+        int x;
+        scanf("%d", &x);
+        new_nod->info = x;
+
+        if(!*head_dl)
+            *head_dl = new_nod;
+        else {
+            nod *tmp_head = *head_dl;
+            while(tmp_head->next != tmp_head)
+                tmp_head = tmp_head->next;
+            tmp_head->next = new_nod;
+            new_nod->prev = tmp_head;
+        }
+
+        new_nod->next = new_nod;
+    }
+
+    return;
+}
+
+void disp_dl_list(nod *head_dl) {
+    nod *prev = NULL;
+    while(head_dl != prev) {
+        printf("valoare: %d\nadresa curenta: %p\nadresa urmatoare: %p\nadresa anterioara: %p\n\n", head_dl->info, head_dl, head_dl->next, head_dl->prev);
+        prev = head_dl;
+        head_dl = head_dl->next;
+    }
+    printf("-------------------------------------------------------------------------\n");
+
+}
 
 int main(int argc, char **argv) {
     Node *head_1 = NULL, *head_2 = NULL, *head_interclas = NULL, *head_interclas_no_cpy;
+    nod* head_dl;
     int n, m;
 
     list_create(&n, &head_1);
@@ -177,8 +222,11 @@ int main(int argc, char **argv) {
     disp_list(head_1);
     disp_list(head_2);
 
-    task3_remove_k_elem(&head_1);
-    disp_list(head_1);
+    //task3_remove_k_elem(&head_1);
+    //disp_list(head_1);
+
+    task4_dl_list_santinela(&head_dl);
+    disp_dl_list(head_dl);
 
     //head_interclas_no_cpy = task2_interclass_no_cpy(head_1, head_2);
     //disp_list(head_interclas_no_cpy);

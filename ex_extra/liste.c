@@ -10,6 +10,7 @@ typedef struct linked_list{
 void list_create(int *list_s, Node **head); //creating list with a given number of elements
 void verify_alloc(const void *p); //checks dynamic mem allocation
 void disp_list(Node *head); //displays the elements of the list
+Node* task1_interclass(Node *head_1, Node *head_2); //interclasare pe liste 
 
 void verify_alloc(const void *p) {
     if(!p) 
@@ -95,17 +96,62 @@ Node* task1_interclass(Node *head_1, Node *head_2) {
     return interclas;
 }
 
+Node* task2_interclass_no_cpy(Node *head_1, Node *head_2) {
+    Node *new_head = NULL;
+    Node *tail = NULL;
+    Node *prev = NULL;
+    Node *current_node;
+
+    while(head_1 && head_2) {
+        if (head_1->info < head_2->info)
+            if(!prev || prev->info != head_1->info) {
+                current_node = head_1;
+                head_1 = head_1->next;
+            }
+            else
+                head_1 = head_1->next;
+        else
+            if(!prev || prev->info != head_2->info) {
+                current_node = head_2;
+                head_2 = head_2->next;
+            }
+            else
+                head_2 = head_2->next;
+
+        if(!new_head) {
+            new_head = current_node;
+            tail = current_node;
+        }
+        else {
+            tail->next = current_node;
+            tail = tail->next;
+        }
+
+        prev = current_node;
+    }
+
+    if(head_1)
+        tail->next = head_1;
+    if(head_2)
+        tail->next = head_2;
+
+    return new_head;
+}
+
 int main(int argc, char **argv) {
-    Node *head_1 = NULL, *head_2 = NULL, *head_interclas = NULL;
+    Node *head_1 = NULL, *head_2 = NULL, *head_interclas = NULL, *head_interclas_no_cpy;
     int n, m;
 
     list_create(&n, &head_1);
     list_create(&n, &head_2);
-    head_interclas = task1_interclass(head_1, head_2);
 
-    //disp_list(head_1);
+    disp_list(head_1);
+    disp_list(head_2);
+
+    head_interclas_no_cpy = task2_interclass_no_cpy(head_1, head_2);
+    disp_list(head_interclas_no_cpy);
     //aceasta variantra strica listele initiale. daca vrem sa nu le stricam trb sa cream noduri noi pentru head_interclas si sa copeim valorile din noduri
-    disp_list(head_interclas);
+    //disp_list(head_interclas);
 
     return 0;
 }

@@ -172,6 +172,9 @@ void task3_remove_k_elem(Node **head_1) {
     return;
 }
 
+//aici nu avem tocmai un sentinel node!!
+//un sentinel node este un dummy node care face legatura dintre nodul final si cel initial!!
+
 void task4_dl_list_santinela(nod **head_dl) {
     int n;
     printf("Cate elemente are lista dublu inlantuita cu santinela? ");
@@ -200,6 +203,36 @@ void task4_dl_list_santinela(nod **head_dl) {
     return;
 }
 
+void task4_reworked(nod **head_dl, nod **sentinel_node) {    
+    int n;
+    printf("Cate elemente are lista dublu inlantuita cu santinela? ");
+    scanf("%d", &n);
+
+    printf("Introduceti valori pentru noduri: \n");
+    for(int i = 0; i < n; i++) {
+        nod *new_node = (nod*)malloc(sizeof(nod));
+        scanf("%d", &(new_node->info));
+
+        if(!*head_dl){
+            *head_dl = new_node;
+            new_node->next = (*sentinel_node);
+            (*sentinel_node)->prev = new_node;
+            (*sentinel_node)->next = *head_dl;
+        }
+        else {
+            (*sentinel_node)->prev->next = new_node;
+            new_node->prev = (*sentinel_node)->prev;
+            new_node->next = (*sentinel_node);
+            (*sentinel_node)->prev = new_node;
+        }
+    }
+
+    (*sentinel_node)->next = *head_dl;
+    (*head_dl)->prev = *sentinel_node;
+
+    return;
+}
+
 void disp_dl_list(nod *head_dl) {
     nod *prev = NULL;
     while(head_dl != prev) {
@@ -209,11 +242,20 @@ void disp_dl_list(nod *head_dl) {
     }
     printf("-------------------------------------------------------------------------\n");
 
+    return;
+}
+
+void disp_dl_sentinel(nod *head_dl, nod *sentinel) {
+    while(head_dl != sentinel) {
+    printf("valoare: %d\nadresa curenta: %p\nadresa urmatoare: %p\nadresa anterioara: %p\n\n", head_dl->info, head_dl, head_dl->next, head_dl->prev);
+        head_dl = head_dl->next;
+    }
+    printf("-------------------------------------------------------------------------\n");
 }
 
 int main(int argc, char **argv) {
     Node *head_1 = NULL, *head_2 = NULL, *head_interclas = NULL, *head_interclas_no_cpy;
-    nod* head_dl;
+    nod *head_dl = NULL, *sentinel_node = malloc(sizeof(nod));
     int n, m;
 
     list_create(&n, &head_1);
@@ -225,8 +267,11 @@ int main(int argc, char **argv) {
     //task3_remove_k_elem(&head_1);
     //disp_list(head_1);
 
-    task4_dl_list_santinela(&head_dl);
-    disp_dl_list(head_dl);
+    //task4_dl_list_santinela(&head_dl);
+    //disp_dl_list(head_dl);
+
+    task4_reworked(&head_dl, &sentinel_node);
+    disp_dl_sentinel(head_dl, sentinel_node);
 
     //head_interclas_no_cpy = task2_interclass_no_cpy(head_1, head_2);
     //disp_list(head_interclas_no_cpy);

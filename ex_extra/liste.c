@@ -233,6 +233,34 @@ void task4_reworked(nod **head_dl, nod **sentinel_node) {
     return;
 }
 
+nod* create_empty_dl_list() {
+    nod *dummy = (nod*)malloc(sizeof(nod));
+    dummy->next = dummy;
+    dummy->prev = dummy;
+
+    return dummy;
+}
+
+void task_4_reworked_noHead(nod *sentinel_node) {
+    int n;
+    printf("Cate elemente sa aiba lista? ");
+    scanf("%d", &n);
+
+    printf("Introduceti valori pentru noduri:\n");
+    for(int i = 0; i < n; i++) {
+        nod *new_node = (nod*)malloc(sizeof(nod));
+        scanf("%d", &(new_node->info));
+
+        nod *last = sentinel_node->prev;
+        last->next = new_node;
+        new_node->prev = last;
+        new_node->next = sentinel_node;
+        sentinel_node->prev = new_node;
+    }
+
+    return;
+}
+
 void disp_dl_list(nod *head_dl) {
     nod *prev = NULL;
     while(head_dl != prev) {
@@ -253,9 +281,19 @@ void disp_dl_sentinel(nod *head_dl, nod *sentinel) {
     printf("-------------------------------------------------------------------------\n");
 }
 
+void disp_dl_sentinel_noHead(nod *sentinel_node) {
+    nod *current = sentinel_node->next;
+    while(current != sentinel_node) {
+        printf("valoare: %d\nadresa curenta: %p\nadresa urmatoare: %p\nadresa anterioara: %p\n\n", current->info, current, current->next, current->prev);
+        current = current->next;
+    }
+    
+    return;
+}
+
 int main(int argc, char **argv) {
     Node *head_1 = NULL, *head_2 = NULL, *head_interclas = NULL, *head_interclas_no_cpy;
-    nod *head_dl = NULL, *sentinel_node = malloc(sizeof(nod));
+    nod *head_dl = NULL, *sentinel_node = NULL;
     int n, m;
 
     list_create(&n, &head_1);
@@ -270,8 +308,12 @@ int main(int argc, char **argv) {
     //task4_dl_list_santinela(&head_dl);
     //disp_dl_list(head_dl);
 
-    task4_reworked(&head_dl, &sentinel_node);
-    disp_dl_sentinel(head_dl, sentinel_node);
+    //task4_reworked(&head_dl, &sentinel_node);
+    //disp_dl_sentinel(head_dl, sentinel_node);
+
+    sentinel_node = create_empty_dl_list();
+    task_4_reworked_noHead(sentinel_node);
+    disp_dl_sentinel_noHead(sentinel_node);
 
     //head_interclas_no_cpy = task2_interclass_no_cpy(head_1, head_2);
     //disp_list(head_interclas_no_cpy);

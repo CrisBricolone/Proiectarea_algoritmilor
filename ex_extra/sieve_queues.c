@@ -120,11 +120,47 @@ void disp_stack(STACK_t *top) {
     return;
 }
 
+void pop(STACK_t **top){
+    if(!top) {
+        printf("Stack is already empty!\n");
+        return;
+    }
+    
+    STACK_t *current_node = *top;
+    (*top) = current_node->next;
+    free(current_node);
+
+    return;
+}
+
+void push(STACK_t **top, int x) {
+    STACK_t *new_node = (STACK_t*)malloc(sizeof(STACK_t));
+    new_node->info = x;
+    if(!*top) {
+        *top = new_node;
+    }
+    else{
+        new_node->next = *top;
+        *top = new_node;
+    }
+    return;
+}
+
+void reverse_stack(STACK_t **top) {
+    STACK_t *reverse_s = NULL;
+
+    if(!reverse_s) {
+        reverse_s = *top;
+        pop(top);
+    }
+    return;
+}
+
 int main(void) {
     STACK_t *s1 = NULL, *s2 = NULL, *s3 = NULL;
     QUEUE_t *q1 = NULL;
 
-    //s1 = create_stack(s1);
+    s1 = create_stack(s1);
     //s2 = create_stack(s2);
 
     //disp_stack(s1);
@@ -133,8 +169,12 @@ int main(void) {
     //s3 = interclas_stacks(s1, s2);
     //disp_stack(s3);
 
-    q1 = create_queue(q1);
-    disp_queue(q1);
+    //q1 = create_queue(q1);
+    //disp_queue(q1);
+
+    disp_stack(s1);
+    reverse_stack(&s1);
+    disp(s1);
 
     return 0;
 }
